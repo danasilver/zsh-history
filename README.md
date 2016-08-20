@@ -1,5 +1,23 @@
 ## zsh history
 
+Read and parse your complete zsh history.
+
+```js
+require('zsh-history').history()
+  .then(console.log);
+
+[
+  {
+    time: 2016-08-20T20:09:24.000Z,
+    executionTime: 2,
+    command: 'sleep',
+    arguments: '2'
+  },
+
+  // many more commands
+]
+```
+
 ### Execution Time
 
 See http://zsh.sourceforge.net/Doc/Release/Options.html#History.

@@ -5,19 +5,18 @@ const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 
 function history(histFile) {
-  if (!isZSH()) return;
+  histFile = histFile || path.join(os.homedir(), '.zsh_history');
 
-  return execa(path.join(__dirname, 'history.sh'))
+  return execa(path.join(__dirname, 'history.sh'), [histFile])
   .then(result => {
     return fs.readFileAsync(result.stdout, 'utf-8');
   })
   .then(history => {
     return history.trim().split('\n').map(parseLine);
+  })
+  .catch(error => {
+    throw new Error(`Unable to read history from \`${histFile}\`.`);
   });
-};
-
-function isZSH() {
-  return /zsh$/.test(process.env.SHELL);
 };
 
 function parseLine(line) {
@@ -31,4 +30,4 @@ function parseLine(line) {
   };
 };
 
-exports.history = history;
+module.exports = history;

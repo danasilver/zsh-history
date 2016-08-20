@@ -6,7 +6,7 @@ file="/tmp/zsh-history-${now}.tmp"
 # Some good zsh history options to try
 # and get as much history as possible.
 # The default is 30 lines.
-export HISTFILE=~/.zsh_history
+export HISTFILE=$1
 export HISTSIZE=100000
 export SAVEHIST=100000
 

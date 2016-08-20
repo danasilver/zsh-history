@@ -1,0 +1,33 @@
+{
+  "name": "zsh-history",
+  "version": "1.0.0",
+  "description": "Parse the complete zsh history.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danasilver/zsh-history.git"
+  },
+  "keywords": [
+    "zsh",
+    "history",
+    "shell",
+    "command",
+    "line"
+  ],
+  "author": "Dana Silver <dsilver1221@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danasilver/zsh-history/issues"
+  },
+  "homepage": "https://github.com/danasilver/zsh-history#readme",
+  "devDependencies": {
+    "ava": "^0.16.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "execa": "^0.4.0"
+  }
+}

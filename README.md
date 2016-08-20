@@ -3,8 +3,7 @@
 Read and parse your complete zsh history.
 
 ```js
-require('zsh-history').history()
-  .then(console.log);
+require('zsh-history')().then(console.log);
 
 [
   {

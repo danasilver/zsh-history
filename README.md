@@ -8,7 +8,7 @@ require('zsh-history').history()
 
 [
   {
-    time: 2016-08-20T20:09:24.000Z,
+    time: Date('2016-08-20T20:09:24.000Z'),
     executionTime: 2,
     command: 'sleep',
     arguments: '2'

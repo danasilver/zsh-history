@@ -10,7 +10,7 @@ require('zsh-history')().then(console.log);
     time: Date('2016-08-20T20:09:24.000Z'),
     executionTime: 2,
     command: 'sleep',
-    arguments: '2'
+    arguments: [ '2' ]
   },
 
   // many more commands

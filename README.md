@@ -1,4 +1,4 @@
-## zsh history
+## zsh history [![Build Status](https://travis-ci.org/danasilver/zsh-history.svg?branch=master)](https://travis-ci.org/danasilver/zsh-history)
 
 Read and parse your complete zsh history.
 

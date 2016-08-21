@@ -15,7 +15,7 @@ function history(histFile) {
     return history.trim().split('\n').map(parseLine);
   })
   .catch(error => {
-    throw new Error(`Unable to read history from \`${histFile}\`.`);
+    throw new Error(`Unable to read history from \`${histFile}\`.\n${error.stack}`);
   });
 };
 

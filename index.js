@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
+const argvSplit = require('argv-split');
 const execa = require('execa');
-
 const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 
@@ -26,7 +26,7 @@ function parseLine(line) {
     time: new Date(parseInt(parts[2]) * 1000),
     executionTime: parseInt(parts[3]) * 60 + parseInt(parts[4]),
     command: parts[5],
-    arguments: parts[6],
+    arguments: argvSplit(parts[6] || ''),
   };
 };
 

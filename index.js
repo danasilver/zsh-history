@@ -7,12 +7,18 @@ const path = require('path');
 function history(histFile) {
   histFile = histFile || path.join(os.homedir(), '.zsh_history');
 
-  return execa(path.join(__dirname, 'history.sh'), [histFile])
+  return Promise.resolve(execa(path.join(__dirname, 'history.sh'), [histFile]))
   .then(result => {
-    return fs.readFileAsync(result.stdout, 'utf-8');
+    return Promise.props({
+      contents: fs.readFileAsync(result.stdout, 'utf-8'),
+      tempFile: result.stdout,
+    });
+  })
+  .tap(history => {
+    return fs.unlinkAsync(history.tempFile);
   })
   .then(history => {
-    return history.trim().split('\n').map(parseLine);
+    return history.contents.trim().split('\n').map(parseLine);
   })
   .catch(error => {
     throw new Error(`Unable to read history from \`${histFile}\`.\n${error.stack}`);

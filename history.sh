@@ -13,11 +13,18 @@ export SAVEHIST=100000
 # Read history from $HISTFILE.
 fc -R
 
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
 # Use fc to read and format the history
 # since it's otherwise hard to parse.
 # See: https://github.com/johan/zsh/blob/master/Src/hist.c#L2192-L2220
 fc -lDt '%s' 1 > $file
 
-echo $file
+if [ $? -ne 0 ]; then
+  exit 1
+fi
 
+echo $file
 exit 0

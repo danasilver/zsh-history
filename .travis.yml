@@ -3,16 +3,10 @@ node_js:
   - "6"
   - "5"
   - "4"
+sudo: required
 before_install:
-  - export LOCAL="$(mktemp --directory --tmpdir=${TMPDIR:/tmp} local.XXXXXX)"
-  - export DEP_ZSH_VERSION="zsh-5.2"
-  - curl -L http://downloads.sourceforge.net/zsh/$DEP_ZSH_VERSION.tar.gz | tar zx
-  - cd $DEP_ZSH_VERSION
-  - ./configure --prefix=$LOCAL
-  - make
-  - make install
-  - cd -
-  - export PATH="$LOCAL/bin:$PATH"
+  - "sudo apt-get install zsh"
+  - "sudo chsh -s $(which zsh)"
 before_script:
   - zsh --version
   - npm --version

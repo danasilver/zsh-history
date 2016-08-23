@@ -1,7 +1,7 @@
 {
   "name": "zsh-history",
   "version": "1.0.0",
-  "description": "Parse the complete zsh history.",
+  "description": "Read and parse your complete zsh history.",
   "main": "index.js",
   "scripts": {
     "test": "ava --serial"

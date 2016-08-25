@@ -4,9 +4,9 @@ import history from '.';
 
 const fixture = path.join(__dirname, 'fixture');
 
-test('reads 3 lines from history', t => {
+test('reads 5 lines from history', t => {
   return history(fixture).then(commands => {
-    t.is(commands.length, 3);
+    t.is(commands.length, 5);
   });
 });
 
@@ -39,4 +39,16 @@ test('parses the command\'s arguments into an array', t => {
 
 test('throws when unable to read history', t => {
   t.throws(history('notafile'));
+});
+
+test('parses a line continuation in quotes', t => {
+  return history(fixture).then(commands => {
+    t.deepEqual(commands[3].arguments, ['helloworld']);
+  });
+});
+
+test('parses a newline in quotes', t => {
+  return history(fixture).then(commands => {
+    t.deepEqual(commands[4].arguments, ['hello\\nworld']);
+  });
 });

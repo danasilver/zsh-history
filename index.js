@@ -4,6 +4,8 @@ const execa = require('execa');
 const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 
+const reLine = /^ *(\d+)  (\d+)  (\d+):(\d+)  (\S+) ?(.*)?/;
+
 function history(histFile) {
   histFile = histFile || path.join(os.homedir(), '.zsh_history');
 
@@ -18,15 +20,28 @@ function history(histFile) {
     return fs.unlinkAsync(history.tempFile);
   })
   .then(history => {
-    return history.contents.trim().split('\n').map(parseLine);
+    return history.contents.trim().split('\n')
+      .reduce(multilineCommand, [])
+      .map(parseLine);
   })
   .catch(error => {
     throw new Error(`Unable to read history from \`${histFile}\`.\n${error.stack}`);
   });
 };
 
+function multilineCommand(commands, curr, i) {
+  if (!commands.length || curr.match(reLine)) {
+    commands.push(curr);
+  } else {
+    const last = commands.pop();
+    commands.push(`${last}${curr}`);
+  }
+
+  return commands;
+}
+
 function parseLine(line) {
-  const parts = line.match(/^ *(\d+)  (\d+)  (\d+):(\d+)  (\S+) ?(.*)?/);
+  const parts = line.match(reLine);
 
   return {
     time: new Date(parseInt(parts[2]) * 1000),
